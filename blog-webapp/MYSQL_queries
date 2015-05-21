@@ -1,0 +1,44 @@
+create database BlogDB;
+
+1)
+create table Comment (
+id int(6) auto_increment primary key,
+time_created datetime not null,
+content varchar(200) not null,
+post_id int(6) not null,
+level int(1) not null,
+parent_id int(6)
+);
+
+
+1.1) insert into Comment (time_created, content, post_id, level, parent_id) values (now(), "comment1", 55, 1, 0);
+
+
+2) create table Post (
+id int(6) auto_increment primary key,
+title varchar(300) not null,
+content text,
+time_created datetime not null
+);
+
+
+3) DROP TABLE IF EXISTS `user`;
+create table user (
+username varchar(35) primary key not null,
+password varchar(100) not null,
+enabled boolean not null
+);
+insert into user (username, password, enabled) values ("user1", "$2a$10$OCqPfQ5/VU8m4mwiBOqYrOnZ2n.PHboSR6.Xvs9AadXrQnwsaoaHu", true);
+
+
+
+4) DROP TABLE IF EXISTS `user_roles`;
+create table user_roles (
+username varchar(35) primary key not null,
+role varchar(35) not null
+);
+insert into user_roles (username, role) values ("user1", "ROLE_ADMIN");
+
+
+
+
