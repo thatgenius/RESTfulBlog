@@ -1,7 +1,0 @@
-blog\entity\Comment.class
-blog\controller\WebBlogController.class
-blog\entity\User.class
-blog\service\RESTService.class
-blog\controller\AuthorizationController.class
-blog\entity\Post.class
-blog\DAO\UserDao.class

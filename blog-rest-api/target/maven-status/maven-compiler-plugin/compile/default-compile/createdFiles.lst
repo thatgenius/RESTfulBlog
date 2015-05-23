@@ -1,5 +1,0 @@
-blog\entity\Comment.class
-blog\entity\Post.class
-blog\DAO\PostDAO.class
-blog\DAO\CommentDAO.class
-blog\controller\RestBlogController.class
