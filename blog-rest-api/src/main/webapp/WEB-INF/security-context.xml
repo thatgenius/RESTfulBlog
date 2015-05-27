@@ -1,3 +1,4 @@
+<!--
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -15,6 +16,42 @@
         <authentication-provider>
             <user-service >
                 <user name="user" password="pass" authorities="AUTHORIZED_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>-->
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <beans:bean id="restAuthenticationEntryPoint" class="blog.entity.RestAuthenticationEntryPoint"/>
+
+    <http  pattern="/rest/**" entry-point-ref="restAuthenticationEntryPoint" use-expressions="true" auto-config="false" create-session="stateless" >
+        <custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER"   />
+        <intercept-url pattern="/rest/**" access="isAuthenticated()" />
+        <logout />
+    </http>
+
+    <beans:bean class="blog.entity.CustomTokenAuthenticationFilter" id="authenticationTokenProcessingFilter">
+        <beans:constructor-arg type="java.lang.String" value="/rest/**"/>
+        <beans:constructor-arg
+                type="org.springframework.security.authentication.AuthenticationManager" ref="authManager">
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <http auto-config="true">
+        <intercept-url pattern="/token/**" access="ROLE_USER" />
+    </http>
+
+    <authentication-manager alias="authManager" erase-credentials="false">
+        <authentication-provider>
+            <user-service >
+                <user name="123" password="123" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
