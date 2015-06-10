@@ -15,10 +15,7 @@ import javax.servlet.http.HttpSession;
 @Service
 public class RESTService {
 
-    private final String RESTServiceAddress = "http://localhost:8080/rest";
-
-    //login and pass as login:pass
-   // private final String RESTServicePassword = "Basic dXNlcjpwYXNz";
+    private String RESTServiceAddress = "http://localhost:8080/rest";
     private String headerName = "My-Rest-Token";
 
     @Autowired

@@ -1,4 +1,4 @@
-package blog.entity.Authorization;
+package blog.entity.Authentication;
 
 import blog.DAO.UserDAO;
 import blog.service.CryptService;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Filter(name = "CustomTokenAuthenticationFilter")
 public class CustomTokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private AuthenticationManager authenticationManager;

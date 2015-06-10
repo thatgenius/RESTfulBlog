@@ -11,10 +11,10 @@ import java.util.Date;
 public class Post {
     @Id
     @GeneratedValue
-    int id;
-    String title;
-    String content;
-    Date time_created;
+    private int id;
+    private String title;
+    private String content;
+    private Date time_created;
 
     public Date getTime_created() {
         return time_created;

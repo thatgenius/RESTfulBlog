@@ -1,4 +1,4 @@
-package blog.entity.Authorization;
+package blog.entity.Authentication;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

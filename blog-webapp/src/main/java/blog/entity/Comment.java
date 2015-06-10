@@ -12,12 +12,12 @@ public class Comment {
     private static int currentPosition = 0;
     @Id
     @GeneratedValue
-    int id;
-    Date time_created;
-    String content;
-    int post_id;
-    int parent_id;
-    int level;
+    private int id;
+    private Date time_created;
+    private String content;
+    private int post_id;
+    private int parent_id;
+    private int level;
 
     public int getParent_id() {
         return parent_id;

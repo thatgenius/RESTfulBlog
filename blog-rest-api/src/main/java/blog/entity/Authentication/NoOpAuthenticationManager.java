@@ -1,4 +1,4 @@
-package blog.entity.Authorization;
+package blog.entity.Authentication;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
