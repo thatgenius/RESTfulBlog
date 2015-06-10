@@ -17,23 +17,12 @@
     </servlet-mapping>
 
     <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>
-            org.springframework.web.filter.DelegatingFilterProxy
-        </filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <filter>
         <filter-name>httpMethodFilter</filter-name>
         <filter-class>
             org.springframework.web.filter.HiddenHttpMethodFilter
         </filter-class>
     </filter>
+
 
     <filter-mapping>
         <filter-name>httpMethodFilter</filter-name>
@@ -46,8 +35,36 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/security-context.xml</param-value>
+        <param-value>/WEB-INF/security-context.xml /WEB-INF/mvc-dispatcher-servlet.xml</param-value>
     </context-param>
+
+    <filter>
+        <filter-name>tokenManagerFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <init-param>
+            <param-name>targetBeanName</param-name>
+            <param-value>tokenManagerFilterBean</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>tokenManagerFilter</filter-name>
+        <url-pattern>/static/*</url-pattern>
+        <url-pattern>/j_spring_security_logout</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>
+            org.springframework.web.filter.DelegatingFilterProxy
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
 </web-app>
 
 

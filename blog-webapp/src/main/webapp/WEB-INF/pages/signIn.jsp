@@ -3,6 +3,7 @@
 
 <jsp:include page="header.jsp"/>
 <c:url value="/static/j_spring_security_check" var="signInNativeProcessingURL"/>
+<c:url value="/signInProcessing" var="signInNativeProcessingURL2"/>
 <c:url value="/signUp" var="signUpURL"/>
 
 <c:if test="${not empty param.login_error}">

@@ -1,18 +1,16 @@
-package blog.entity;
+package blog.entity.Authorization;
 
+import blog.DAO.UserDAO;
 import blog.service.CryptService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-
 import javax.security.sasl.AuthenticationException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -20,12 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Filter(name = "CustomTokenAuthenticationFilter")
 public class CustomTokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private AuthenticationManager authenticationManager;
-
     @Autowired
-    private CryptService cryptService; //service which can decrypt token
+    private CryptService cryptService;
+    @Autowired
+    private UserDAO userDAO;
 
     public CustomTokenAuthenticationFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager) {
         super(defaultFilterProcessesUrl);
@@ -53,14 +53,12 @@ public class CustomTokenAuthenticationFilter extends AbstractAuthenticationProce
         chain.doFilter(request, response);
     }
 
-    // This method makes some validation depend on your application logic
-    private Authentication parseToken(String tokenString) {
+    private Authentication parseToken(String encryptedToken) {
         try {
-            String encryptedToken =  tokenString;
-                    //cryptService.decrypt(tokenString);
-            Token token = new ObjectMapper().readValue(encryptedToken, Token.class);
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(token.getUsername(), token.getPassword()));
+            String username = cryptService.decrypt(encryptedToken);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(username, null,
+                    AuthorityUtils.createAuthorityList(userDAO.getUserRole(username)));
+            return authentication;
         } catch (Exception e) {
             return null;
         }

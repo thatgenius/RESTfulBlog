@@ -1,4 +1,4 @@
-package blog.entity;
+package blog.entity.Authorization;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
