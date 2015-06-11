@@ -2,6 +2,7 @@ package blog.entity.Authentication;
 
 import blog.DAO.UserDAO;
 import blog.service.CryptService;
+import com.sun.javafx.beans.annotations.Default;
 import org.hibernate.annotations.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,7 +38,7 @@ public class CustomTokenAuthenticationFilter extends AbstractAuthenticationProce
     public final String HEADER_SECURITY_TOKEN = "My-Rest-Token";
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String token = request.getHeader(HEADER_SECURITY_TOKEN);
         Authentication userAuthenticationToken = parseToken(token);
         if (userAuthenticationToken == null) {

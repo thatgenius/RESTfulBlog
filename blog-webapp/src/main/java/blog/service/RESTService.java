@@ -51,7 +51,7 @@ public class RESTService {
         HttpHeaders headers = new HttpHeaders();
         headers.add(headerName, getToken());
         HttpEntity request = new HttpEntity(comment, headers);
-        String url = RESTServiceAddress + "/rest/posts/" +comment.getPost_id() + "/comments";
+        String url = RESTServiceAddress + "/rest/posts/" +comment.getPostId() + "/comments";
         restTemplate.exchange(url, HttpMethod.POST, request, Comment.class).getBody();
     }
 

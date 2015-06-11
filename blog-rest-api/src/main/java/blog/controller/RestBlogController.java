@@ -5,6 +5,7 @@ import blog.DAO.PostDAO;
 import blog.entity.Comment;
 import blog.entity.Post;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
@@ -18,6 +19,8 @@ public class RestBlogController {
 
     private PostDAO postDAO;
     private CommentDAO commentDAO;
+    private final String authorizedUser = "ROLE_USER";
+    private final String admin = "ROLE_ADMIN";
 
     @Inject
     public RestBlogController(PostDAO postDAO, CommentDAO commentDAO) {
@@ -63,14 +66,12 @@ public class RestBlogController {
         return postDAO.delete(id);
     }
 
-
     // update READY
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePost(@PathVariable int id, @RequestBody Post post) {
         postDAO.update(post);
     }
-
 
     // create READY
     @RequestMapping(method = RequestMethod.POST, headers = "Accept=text/xml, application/json")

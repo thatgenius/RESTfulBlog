@@ -25,12 +25,10 @@ public class WebBlogController {
     @Autowired
     RESTService restService;
 
-
     private boolean tokenIsPresent(HttpSession session) {
         String token = (String)session.getAttribute("token");
         return token != null ? true : false;
     }
-
 
     @RequestMapping(method = RequestMethod.GET)
     public String getPosts(Model model, HttpSession session) {
@@ -54,13 +52,13 @@ public class WebBlogController {
     @RequestMapping(value = "/createComment", method = RequestMethod.POST)
     public RedirectView createComment(Comment comment) {
         restService.createComment(comment);
-        RedirectView rv = new RedirectView("/post/" + comment.getPost_id());
+        RedirectView rv = new RedirectView("/post/" + comment.getPostId());
         rv.setContextRelative(true);
         rv.setExposeModelAttributes(false);
         return rv;
     }
 
-    @Secured({authorizedUser, admin})
+    @Secured(admin)
     @RequestMapping(method = RequestMethod.GET, value = "/new")
     public String createPostPage(Model model) {
         Post post = new Post();
@@ -68,7 +66,7 @@ public class WebBlogController {
         return "newPost";
     }
 
-    @Secured({authorizedUser, admin})
+    @Secured(admin)
     @RequestMapping(method = RequestMethod.POST, value = "/createPost")
     public RedirectView createPost(Post post, Model model) {
         restService.createPost(post);
@@ -78,7 +76,7 @@ public class WebBlogController {
         return rv;
     }
 
-    @Secured({authorizedUser, admin})
+    @Secured(admin)
     @RequestMapping(value = "/deletePost/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String deletePost(@PathVariable int id) {
@@ -86,16 +84,14 @@ public class WebBlogController {
         return "deleted";
     }
 
-    @Secured({authorizedUser, admin})
+    @Secured(admin)
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String updatePostPage(@PathVariable int id, Model model) {
         model.addAttribute("post", restService.retrievePost(id));
         return "update";
-
-
     }
 
-    @Secured({authorizedUser, admin})
+    @Secured(admin)
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public RedirectView updatePost(Post post, Model model) {
         restService.updatePost(post);

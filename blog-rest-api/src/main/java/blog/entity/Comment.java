@@ -1,10 +1,7 @@
 package blog.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,18 +10,21 @@ public class Comment {
     @Id
     @GeneratedValue
     private int id;
-    private Date time_created;
+    @Column(name = "time_created")
+    private Date timeCreated;
     private String content;
-    private int post_id;
-    private int parent_id;
+    @Column(name = "post_id")
+    private int postId;
+    @Column(name = "parent_id")
+    private int parentId;
     private int level;
 
-    public int getParent_id() {
-        return parent_id;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     public int getLevel() {
@@ -35,12 +35,12 @@ public class Comment {
         this.level = level;
     }
 
-    public Date getTime_created() {
-        return time_created;
+    public Date getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setTime_created(Date time_created) {
-        this.time_created = time_created;
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
     public int getId() {
@@ -59,12 +59,12 @@ public class Comment {
         this.content = content;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
 }

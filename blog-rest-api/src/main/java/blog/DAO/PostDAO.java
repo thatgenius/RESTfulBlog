@@ -2,12 +2,13 @@ package blog.DAO;
 
 import blog.entity.Post;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Date;
 import java.util.List;
@@ -20,8 +21,8 @@ public class PostDAO {
     @Transactional
     @SuppressWarnings("unchecked")
     public List<Post> findAll() {
-        Session session = sessionFactory.getCurrentSession();
-        List posts = session.createQuery("from Post").list();
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Post.class).addOrder(Order.desc("timeCreated"));
+        List<Post> posts = criteria.list();
         return posts;
     }
 
@@ -37,7 +38,7 @@ public class PostDAO {
     @SuppressWarnings("unchecked")
     public void save(Post post) {
         if (post != null) {
-            post.setTime_created(new Date());
+            post.setTimeCreated(new Date());
         }
         sessionFactory.getCurrentSession().save(post);
     }

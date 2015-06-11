@@ -28,7 +28,7 @@
                         <a href="#" id="deletePost" class="${c.id}">Delete</a>
                         <a href="${updateURL}/${c.id}">Update</a>
                         </security:authorize>
-                        ${dateFormatter.format(c.time_created)}
+                        ${dateFormatter.format(c.timeCreated)}
                     </td>
                 </tr>
 

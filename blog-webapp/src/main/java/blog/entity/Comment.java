@@ -13,18 +13,18 @@ public class Comment {
     @Id
     @GeneratedValue
     private int id;
-    private Date time_created;
+    private Date timeCreated;
     private String content;
-    private int post_id;
-    private int parent_id;
+    private int postId;
+    private int parentId;
     private int level;
 
-    public int getParent_id() {
-        return parent_id;
+    public int getParentId() {
+        return parentId;
     }
 
-    public void setParent_id(int parent_id) {
-        this.parent_id = parent_id;
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
     }
 
     public int getLevel() {
@@ -35,12 +35,12 @@ public class Comment {
         this.level = level;
     }
 
-    public Date getTime_created() {
-        return time_created;
+    public Date getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setTime_created(Date time_created) {
-        this.time_created = time_created;
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
     public int getId() {
@@ -59,12 +59,12 @@ public class Comment {
         this.content = content;
     }
 
-    public int getPost_id() {
-        return post_id;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost_id(int post_id) {
-        this.post_id = post_id;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
     public static Comment[] orderComments(Comment[] allPostComments) {
@@ -81,7 +81,7 @@ public class Comment {
 
     private static void addChildrenComments(Comment[] result, Comment parentComment, Comment[] allPostComments) {
         for (Comment current : allPostComments) {
-            if (current.getParent_id() == parentComment.getId()) {
+            if (current.getParentId() == parentComment.getId()) {
                 result[currentPosition++] = current;
                 addChildrenComments(result, current, allPostComments);
             }

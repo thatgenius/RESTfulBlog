@@ -31,7 +31,7 @@
         <br/>
 
         <sf:form method="post" modelAttribute="comment" action="${createCommentURL}">
-            <sf:input type="hidden" path="post_id" value="${post.id}" />
+            <sf:input type="hidden" path="postId" value="${post.id}" />
             <sf:input type="hidden" path="level" value="1" />
             <sf:textarea path="content" /><br/><br/>
             <button type="submit">Post</button>
@@ -48,7 +48,7 @@
                         <c:if test="${comment.level == 1}">
                             <tr>
                                 <td colspan="2">
-                                        <small>${dateFormatter.format(comment.time_created)}</small><br/>
+                                        <small>${dateFormatter.format(comment.timeCreated)}</small><br/>
                                         ${comment.content}
                                 </td>
                             </tr>
@@ -58,9 +58,9 @@
                                     <div onclick="return toggleMe('comment ${comment.id}')"><div style="color: #2e9fff; font-weight: 700;">Reply</div></div>
                                     <div id="comment ${comment.id}" style="display: none;">
                                         <sf:form method="post" modelAttribute="comment" action="${createCommentURL}">
-                                            <sf:input type="hidden" path="post_id" value="${post.id}" />
+                                            <sf:input type="hidden" path="postId" value="${post.id}" />
                                             <sf:input type="hidden" path="level" value="2" />
-                                            <sf:input type="hidden" path="parent_id" value="${comment.id}" />
+                                            <sf:input type="hidden" path="parentId" value="${comment.id}" />
                                             <sf:textarea path="content" /><br/><br/>
                                             <button type="submit">Post</button>
                                         </sf:form>
@@ -74,7 +74,7 @@
                                     </td>
 
                                     <td>
-                                        <small>${dateFormatter.format(comment.time_created)}</small><br/>
+                                        <small>${dateFormatter.format(comment.timeCreated)}</small><br/>
                                         ${comment.content}
                                     </td>
                                 </tr>

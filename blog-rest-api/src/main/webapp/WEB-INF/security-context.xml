@@ -7,10 +7,10 @@
     http://www.springframework.org/schema/security/spring-security.xsd">
 
     <beans:bean id="restAuthenticationEntryPoint" class="blog.entity.Authentication.RestAuthenticationEntryPoint"/>
-
-    <http  pattern="/rest/posts/**" entry-point-ref="restAuthenticationEntryPoint" use-expressions="true" auto-config="false" create-session="stateless" >
+    
+    <http pattern="/rest/posts/**" entry-point-ref="restAuthenticationEntryPoint" use-expressions="true" auto-config="false" create-session="stateless">
         <custom-filter ref="authenticationTokenProcessingFilter" position="FORM_LOGIN_FILTER"   />
-        <intercept-url pattern="/rest/posts/**" access="isAuthenticated()" />
+        <intercept-url pattern="/rest/posts/**" access="isAuthenticated()"/>
         <logout />
     </http>
 

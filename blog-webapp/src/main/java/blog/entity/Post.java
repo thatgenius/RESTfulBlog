@@ -14,14 +14,14 @@ public class Post {
     private int id;
     private String title;
     private String content;
-    private Date time_created;
+    private Date timeCreated;
 
-    public Date getTime_created() {
-        return time_created;
+    public Date getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setTime_created(Date time_created) {
-        this.time_created = time_created;
+    public void setTimeCreated(Date timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
     public String getTitle() {

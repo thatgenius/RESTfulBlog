@@ -22,7 +22,7 @@ public class CommentDAO {
     public List<Comment> findAllByPostId(int postId) {
 
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Comment.class)
-                .add(Restrictions.eq("post_id", postId)).addOrder(Order.desc("time_created"));
+                .add(Restrictions.eq("postId", postId)).addOrder(Order.desc("timeCreated"));
         List<Comment> comments = criteria.list();
         return comments;
     }
@@ -31,7 +31,7 @@ public class CommentDAO {
     @SuppressWarnings("unchecked")
     public void save(Comment comment) {
         if (comment != null) {
-            comment.setTime_created(new Date());
+            comment.setTimeCreated(new Date());
         }
         sessionFactory.getCurrentSession().save(comment);
     }
