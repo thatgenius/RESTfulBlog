@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 @Service
 public class RESTService {
 
-    private String RESTServiceAddress = "http://localhost:8080/rest";
+    private String RESTServiceAddress = "http://localhost:8080";
     private String headerName = "My-Rest-Token";
 
     @Autowired
@@ -24,7 +24,6 @@ public class RESTService {
     private String getToken() {
         return (String)httpSession.getAttribute("token");
     }
-
 
     public Post retrievePost(int id) {
         RestTemplate restTemplate = new RestTemplate();

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/rest/token")
+@RequestMapping("/token")
 public class TokenGrantController {
 
     @Autowired

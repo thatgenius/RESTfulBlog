@@ -25,14 +25,8 @@ public class WebBlogController {
     @Autowired
     RESTService restService;
 
-    private boolean tokenIsPresent(HttpSession session) {
-        String token = (String)session.getAttribute("token");
-        return token != null ? true : false;
-    }
-
     @RequestMapping(method = RequestMethod.GET)
-    public String getPosts(Model model, HttpSession session) {
-        if (!tokenIsPresent(session)) return "signIn";
+    public String getPosts(Model model) {
         model.addAttribute("posts", restService.retrievePosts());
         model.addAttribute("dateFormatter", new SimpleDateFormat(dateFormat));
         return "posts";
@@ -68,7 +62,7 @@ public class WebBlogController {
 
     @Secured(admin)
     @RequestMapping(method = RequestMethod.POST, value = "/createPost")
-    public RedirectView createPost(Post post, Model model) {
+    public RedirectView createPost(Post post) {
         restService.createPost(post);
         RedirectView rv = new RedirectView("/");
         rv.setContextRelative(true);
@@ -93,7 +87,7 @@ public class WebBlogController {
 
     @Secured(admin)
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public RedirectView updatePost(Post post, Model model) {
+    public RedirectView updatePost(Post post) {
         restService.updatePost(post);
         RedirectView rv = new RedirectView("/");
         rv.setContextRelative(true);

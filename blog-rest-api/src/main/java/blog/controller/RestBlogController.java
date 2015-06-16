@@ -14,13 +14,11 @@ import java.net.BindException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/posts")
+@RequestMapping("/posts")
 public class RestBlogController {
 
     private PostDAO postDAO;
     private CommentDAO commentDAO;
-    private final String authorizedUser = "ROLE_USER";
-    private final String admin = "ROLE_ADMIN";
 
     @Inject
     public RestBlogController(PostDAO postDAO, CommentDAO commentDAO) {
@@ -49,7 +47,6 @@ public class RestBlogController {
             throw new BindException();
         }
         commentDAO.save(comment);
-//        response.setHeader("Location", "/rest/posts/" + comment.getId() + "/comments/" + comment.getId());
         return comment;
     }
 
